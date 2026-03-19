@@ -1,3 +1,6 @@
+# This program aims to calculate how many dollars to leave as a tip
+# Given the price of the meal and the percentage of it the customer wants to leave
+# Assumes that the user will input values in expected formats
 def main():
     dollars = dollars_to_float(input("How much was the meal? "))
     percent = percent_to_float(input("What percentage would you like to tip? "))
