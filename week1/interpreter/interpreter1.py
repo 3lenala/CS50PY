@@ -17,6 +17,7 @@ def execute_operation(arithmetic_expression_input: str) -> float:
         if character != ' ' and character not in OPERATIONS:
             current_factor = current_factor + character
         elif character in OPERATIONS:
+            operation = OPERATIONS[character]
             match OPERATIONS[character]:
                 case 0:
                    arithmetic_result = previous_factor + float(current_factor)
