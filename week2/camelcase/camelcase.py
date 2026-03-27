@@ -10,15 +10,13 @@ def turn_to_snake_case(camel_case: str) -> str:
 
     for index, character in enumerate(camel_case):
 
-        if character.isupper():
+        if character.isalnum():
             snake_case_characters.append(character.lower())
-        elif character.islower():
-            snake_case_characters.append(character)
-        elif character.isnumeric():
-            snake_case_characters.append(character)
         else:
-            snake_case_characters.append('_')
-        
+            if snake_case_characters and snake_case_characters[-1] != '_' and index != text_length-1:
+                snake_case_characters.append('_')
+                # esto da la sensacion de parche
+
         if index < (text_length - 1) and snake_case_characters:
             next_character = camel_case[index+1] 
             if word_transition(previous_character, character, next_character):
