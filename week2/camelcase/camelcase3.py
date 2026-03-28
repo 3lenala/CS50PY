@@ -7,8 +7,8 @@ def turn_to_snake_case(camel_case: str) -> str:
 
     Conversion rules:
     - Insert '_' before an uppercase letter that starts a new word.
-    - Treat acronym to word transitions as word boundaries
-      (for example, 'HTTPServer' -> 'http_server').
+    - Don't treat acronym to word transitions as word boundaries
+      (e.g., 'HTTPServer' -> 'httpserver').
     - Normalize consecutive non-alphanumeric characters to a single '_'.
     - Remove the last '_' if the input ends with separators.
     - Keep digits attached to the surrounding word
@@ -38,22 +38,16 @@ def word_transition(camel_case: str, index: int, character: str) -> bool:
     """Return True when the current uppercase character starts a new word.
 
     A new word starts when:
-    - an uppercase letter follows a lowercase letter, or
-    - an uppercase letter follows another uppercase letter and is followed
-      by a lowercase letter, as in acronym-to-word transitions
-      ('HTTPServer' -> 'http_server').
+    - a lowercase letter follows an upperscase letter
+    - a numeric character follows an uppercase letter
     """
     
     if index == 0 or not character.isupper():
         return False
     
     previous_char = camel_case[index-1]
-    if previous_char.islower():
+    if previous_char.islower() or previous_char.isnumeric():
         return True 
-    if index < len(camel_case) - 1:
-        next_char = camel_case[index+1]
-        if next_char.islower():
-            return True
     return False
     
 
